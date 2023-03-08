@@ -56,12 +56,12 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
 #   the material Icons class.
-#  uses-material-design: true
+ uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-   assets:
-     - assets/icons/icon.png
-     - assets/images/bg.jpg
+#   assets:
+#     - assets/icons/icon.png
+#     - assets/images/bg.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -74,10 +74,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-   fonts:
-     - family: DancingScript
-       fonts:
-         - asset: fonts/DancingScript-VariableFont_wght.ttf
+#   fonts:
+#     - family: DancingScript
+#       fonts:
+#         - asset: fonts/DancingScript-VariableFont_wght.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
