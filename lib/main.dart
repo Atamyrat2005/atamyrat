@@ -5,72 +5,113 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static const String _title = 'Counter by Atamyrat';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title), centerTitle: true, backgroundColor: Colors.indigoAccent,),
-        backgroundColor: Colors.black,
-        body: const Center(
-          child: MyStatefulWidget(),
+        appBar: AppBar(
+          title: const Text("Weather", style: TextStyle(color: Colors.black87)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
+          iconTheme: const IconThemeData(color: Colors.black54),
+          actions: [
+            IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
+          ],
         ),
+        body: _buildBody(),
       ),
     );
   }
 }
 
-int _volume = 0;
-int _tap = 0;
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+Widget _buildBody() {
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        _headerImage(),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                _weatherDesc(),
+                const Divider(),
+                _temp(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.delete, size: 35, color: Colors.grey,),
-          tooltip: 'Delete',
-          onPressed: () {
-            setState(() {
-              _volume = 0;
-              _tap = 0;
-            });
-          },
+Image _headerImage() {
+  return const Image(
+    image: NetworkImage(
+        'https://www.2ec.com.au/wp-content/uploads/sites/4/2022/08/MicrosoftTeams-image-21.jpg'),
+    fit: BoxFit.cover,
+  );
+}
+
+Column _weatherDesc() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: const [
+      Text(
+        'Tuesday - May 22',
+        style: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
         ),
-        IconButton(
-          icon: const Icon(Icons.add_circle, size: 35, color: Colors.green,),
-          tooltip: 'Increase volume by 1',
-          onPressed: () {
-            setState(() {
-              _volume += 1;
-              _tap += 1;
-            });
-          },
+      ),
+      Divider(),
+      Text(
+        'Lorem ipsum dolor sit amet consectetur adipiscing elit at diam porta etiam cras, aliquet per viverra imperdiet accumsan consequat magnis enim class rutrum. Blandit litora porta vitae sapien ultricies, habitant ornare nisl enim nulla vel, aliquam neque cum lectus.',
+        style: TextStyle(color: Colors.black54),
+      )
+    ],
+  );
+}
+
+Row _temp() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Icon(
+            Icons.wb_sunny,
+            color: Colors.yellow,
+          ),
+        ],
+  ),
+        const SizedBox(
+          width: 16,
         ),
-        Text('$_volume', style: const TextStyle(color: Colors.white, fontSize: 25),),
-        IconButton(
-          icon: const Icon(Icons.remove_circle, size: 35, color: Colors.red,),
-          tooltip: 'Decrease volume by 1',
-          onPressed: () {
-            setState(() {
-              _volume -= 1;
-              _tap += 1;
-            });
-          },
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: const [
+                Text(
+                  '15°C Clear',
+                  style: TextStyle(color: Colors.deepPurple),
+                )
+              ],
+            ),
+            Row(
+              children: const [
+                Text(
+                  'Ashgabat, Turkmenistan',
+                  style: TextStyle(color: Colors.grey),
+                )
+              ],
+            )
+          ],
         ),
-        Text('Knopka basan sanynyz -> $_tap', style: const TextStyle(color: Colors.yellow, fontSize: 18),),
-      ],
-    );
-  }
+    ],
+  );
 }
